@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[js中基本类型和引用类型]]></title>
+      <url>%2F2016%2F11%2F16%2F1611161%2F</url>
+      <content type="text"><![CDATA[基本类型值指的是简单的数据段 引用类型值指那些可能由多个值的构成的对象。 动态属性基本类型我们不能给基本类型的值添加属性。123var person;person.name="Jack";logconsole.log(person.name);//undefined 引用类型可以添加、改变、删除引用类型的属性。123var person=new object();person.name="Jack";console.log(person.name); //Jack 复制变量值基本类型复制基本类型的值时，会在变量对象上创建一个新的值，然后把该值复制到为新变量分配的位置上。123var num1=5;var num2=num1;console.log(num2);//5 引用类型复制引用类型的值时与基本类型一样，不同的是复制的新值实际上是一个指针，而这个指针指向存储在堆中的对象。 如下面例子所示连个变量其实将引用同一个对象：1234var obj1=new Object();var obj2=obj1;obj2.name="Jack";console.log(obj1.name);//Jack 传递参数基本类型在传递基本类型时，传递的值会被赋值给一个局部变量。12345var person=new Object();function setName(obj)&#123; obj.name="Jack";&#125;console.log(person.name);//Jack 引用类型如下所示，变量被传递到setName()之后就被复制给了obj，在函数内部obj和person引用的是同一个对象，即是说这个变量是按值传递的，obj也会按引用来访问同一对象。12345var person=new Object();function setName(obj)&#123; obj.name="Jack";&#125;console.log(person.name);//Jack 由下面的例子我们可以看到，如果person是按引用传递的，那么输出的应该是’Greg’。这说明即是在函数内部修改了参数的值，但原始的引用任然未变。实际上在函数内部重写obj时，这个变量引用的就是一个局部对象了。1234567var person=new Object();function setName(obj)&#123; obj.name="Jack"; obj=new Object(); obj.name="Greg";&#125;console.log(person.name);//Jack]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[误删mysql数据之后 ，恢复数据的的方法]]></title>
+      <url>%2F2016%2F11%2F13%2FrecoverMysqlData%2F</url>
+      <content type="text"><![CDATA[利用mysql的二进制日志记录文件来恢复数据 就在昨天我在修改线上数据库字段的时候 ，改了一个不合适的字段长度，导致数据丢失，我立马关闭了网站，开始恢复数据。期初很慌张，以前没遇到过这种问题 。后来慢慢爬文，知道可以利用数据库二进制日志文件来恢复数据。于是我利用PHP来解析二进制文件找回了数据。 开启二进制日志记录文件 所幸数据库默认开启了二进制日志记录文件，不然我的数据全没了，损失很大，如果没开启可以用以下方式开启： 编辑my.cnf，添加: 1log-bin=/var/log/mysql/mysql-bin.log 开启日志后需要myssqladmin flush logs才能生效。 需要注意的是log-bin指定扩展名是无效的，当mysql创建二进制日志文件时，首先创建一个以“mysql_log_bin”为名称，以“.index”为后缀的文件；再创建一个以“mysql_log_bin”为名称，以 ‘.000001’为后缀的文件。当mysql服务重新启动一次以“.000001”为后缀的文件会增加一个，并且后缀名加1递增；如果日志长度超过了 max_binlog_size的上限（默认是1G）也会创建一个新的日志文件；使用flush logs（mysql命令符）或者执行mysqladmin –u –p flush-logs（windows命令提示符）也会创建一个新的日志文件。 解析二进制文件中的sql语句首先找到二进制文件，打开后会发现里面有很多SQL语句，但是很乱，有插入语句，跟新语句，还有一些其他日志记录的标志，在这里我只需要插入到order表中的数据 ，所以以此为例，编写php来解析我需要的sql插入语句。123456function getSql()&#123; $s = preg_quote(“INSERT INTO order (price,type,uid,info,subtime) VALUES (“); $str= file_get_contents('/usr/data/mysql-bin.000013'); preg_match_all('/\&#123;.*?\&#125;/',$str,$arr); return $arr[0];&#125; 执行这个函数返回一个数组，这个数组里面就是二进制文件中所有向order表中插入数据的SQL语句。然后在循环执行数组中的SQL语句至此所有数据就恢复了。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[thinkPHP整合微信公众号支付]]></title>
+      <url>%2F2016%2F11%2F13%2FthinkphpWeixinPay%2F</url>
+      <content type="text"><![CDATA[给thinkphp添加扩展实现微信支付，基于官方微信支付的Demo开发 些此篇文章的原因主要是最近在做有关微信支付的开发，由于初次开发走了很多弯路，所以整理了一下写下这篇文章，参考文章thinkphp整合系列之微信公众号支付（来自白俊遥博客http://baijunyao.com）由于他的源码有点问题，所以我做了一些修改，整个项目我也fork过来了。 项目地址：http://git.oschina.net/crazy_boy/thinkphp-bjyadmin ，里面整合了很多扩展都可以参考。 由于大致用法原文里面都有，一下写一些原文中没有讲清楚或没有讲到的东西。 配置项/Application/Common/Conf/config.php源码如下：1234567'WEIXINPAY_CONFIG' =&gt; array( 'APPID' =&gt; '', // 微信支付APPID 'MCHID' =&gt; '', // 微信支付MCHID 商户收款账号 'KEY' =&gt; '', // 微信支付KEY 'APPSECRET' =&gt; '', // 公众帐号secert (公众号支付专用) 'NOTIFY_URL' =&gt; 'http://域名/Home/Weixinpay/notify', // 接收支付状态的连接 ), 其中NITIFY_URL是支付成功后微信返回支付结果的一个连接，在我的测试中，只有在支付成功后微信才会向此链接放回结果，其中要特别注意的一点是此链接不能带有任何的参数，如这种连接是不行的:http://域名/index.php/Home/Weixinpay/notify。 微信支付key需要在微信商户平台中设置。（账户中心-&gt;API安全） 异步接收通知这个讲到的就是上面提到的notify_url，源码如下，由于是微信异步请求的链接，所以切记不要用session来操作，因为他是访问不了的，微信会放回订单号out_trade_no。123456789public function notify()&#123; // 导入微信支付sdk Vendor('Weixinpay.Weixinpay'); $wxpay=new \Weixinpay(); $result=$wxpay-&gt;notify(); if ($result) &#123; // 验证成功 修改数据库的订单状态等 $result['out_trade_no']为订单id &#125;&#125; 订单号$out_trade_no这个订单号是由你自己来生成的，官方推荐的方式是时间+字符串的方式，time()+uid，即当前时间+用户id这是我的做法。生成好之后直接生成订单并存入数据库，下面是我的源码:12345678910111213public function js()&#123; // 此处根据实际业务情况生成订单 然后拿着订单去支付 // 用时间戳虚拟一个订单号 （请根据实际业务更改） session('total_fee',I('get.total_fee')); $order['id']=$out_trade_no; $order['uid']=session('id'); $order['amount']=I('get.total_fee'); M('order')-&gt;add($order); // 组合url $url=U('Wx/pay',array('out_trade_no'=&gt;$out_trade_no)); // 前往支付 $this-&gt;redirect($url);&#125; 之后修改/ThinkPHP/Library/Vendor/Weixinpay/Weixinpay.php 的170行，用获得的订单号查询订单信息，并传入，源码如下：123456789$order=M('order')-&gt;find($out_trade_no);$order=array( 'body'=&gt;“充值”.$order['amount'].'元',// 商品描述（需要根据自己的业务修改 'total_fee'=&gt;$order['amount']*100,// 订单金额 以(分)为单位（需要根据自己的业务修改 'out_trade_no'=&gt;$out_trade_no,// 订单号（需要根据自己的业务修改） 'product_id'=&gt;'1',// 商品id（需要根据自己的业务修改） 'trade_type'=&gt;'JSAPI',// JSAPI公众号支付 'openid'=&gt;$openid// 获取到的openid); html配合使用html的配合：/tpl/Home/Weixinpay/pay.html1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;充值&lt;/title&gt;&lt;/head&gt;&lt;body style="text-align: center;"&gt; &lt;div class="header"&gt; &lt;div class="all_w "&gt; &lt;div class="ttwenz"&gt; &lt;h4&gt;确认交易&lt;/h4&gt; &lt;h5&gt;微信安全支付&lt;/h5&gt; &lt;/div&gt; &lt;/div&gt;&lt;/div&gt;&lt;div class="wenx_xx"&gt; &lt;div class="mz"&gt;充值&lt;/div&gt; &lt;div class="wxzf_price"&gt;￥&#123;:session("total_fee")&#125;&lt;/div&gt;&lt;/div&gt;&lt;div class="skf_xinf"&gt; &lt;div class="all_w"&gt; &lt;span class="bt"&gt;收款方&lt;/span&gt; &lt;span class="fr"&gt;商家名字&lt;/span&gt; &lt;/div&gt;&lt;/div&gt;&lt;a onclick="pay()" class="ljzf_but all_w"&gt;确认支付&lt;/a&gt;&lt;script&gt;function onBridgeReady()&#123; var data=&#123;$data&#125;; WeixinJSBridge.invoke( 'getBrandWCPayRequest', data, function(res)&#123; if(res.err_msg == "get_brand_wcpay_request:ok" ) &#123; alert('支付成功!'); &#125;else&#123; alert('支付失败!'); &#125; history.go(-1); &#125; );&#125;function pay()&#123; if (typeof WeixinJSBridge == "undefined")&#123; if( document.addEventListener )&#123; document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false); &#125;else if (document.attachEvent)&#123; document.attachEvent('WeixinJSBridgeReady', onBridgeReady); document.attachEvent('onWeixinJSBridgeReady', onBridgeReady); &#125; &#125;else&#123; onBridgeReady(); &#125;&#125;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[设置Apache，实现一个空间多个域名]]></title>
+      <url>%2F2016%2F11%2F13%2FsetApacheConfig%2F</url>
+      <content type="text"><![CDATA[此方法利用apache的mod_rewrite模块，实现修改map文件添加域名且不用重启Apache 步骤如下 去除httpd.conf文件中#LoadModule rewrite_module modules/mod_rewrite.so前面的”#”号; 然后再在httpd.conf最后书写如下规则： 12345RewriteEngine onRewriteMap lowercase int:tolowerRewriteMap vhost txt:/usr/local/etc/apache/vhost.mapRewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$RewriteCond $&#123;vhost:%1&#125; ^(/.)$ \r\nRewriteRule ^/(.)$ %1/$1 其中的 /usr/local/etc/apache 是你的 apache 服务器配置文件所在路径，根据实际情况更改（例如在/etc/httpd/下面）。然后，在这个所在路径的目录下创建一个文件： vhost.map，内容格式为： 12#你需要添加的域名 网站路径blog.muzishg.com /usr/local/apache/htdocs/blog 最后重启Apache服务器，之后需要再添加域名时只需要修改vhost.map文件，无需重启Apache，所有域名只需解析一条a记录到该服务器的外网IP上]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[生活]]></title>
+      <url>%2F2016%2F11%2F13%2F%E7%94%9F%E6%B4%BB%2F</url>
+      <content type="text"><![CDATA[生活不止眼前的苟且，还有诗和远方 生命在于折腾折腾来折腾去，又用hexo在github上重新建了这个博客，希望自己坚持下去吧。]]></content>
+    </entry>
+
+    
+  
+  
+</search>
