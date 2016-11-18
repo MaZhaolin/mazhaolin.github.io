@@ -3,7 +3,14 @@
   
     
     <entry>
-      <title><![CDATA[js中基本类型和引用类型]]></title>
+      <title><![CDATA[JS中没有块级作用域]]></title>
+      <url>%2F2016%2F11%2F17%2Fjs-kuaijizuoyongyu%2F</url>
+      <content type="text"><![CDATA[在其他类C语言中由花括号封闭的代码块都有自己的作用域，而JavaScript则没有块级作用域。 如下代码所示，在JavaScript中并不会得到想要的答案。1234if(true)&#123; var color="blue";&#125;console.log(color);//blue 在JavaScript中，if语句中的变量声明会添加到当前的执行环境（在这里是全局环境）中，在使用for语句时要牢记这一差异，例如： 1234for (var i = 0; i &lt; 10; i++) &#123; //todo&#125;console.log(i);//10 声明变量使用var声明变量时，变量会自动添加到最接近的环境中。在函数内部最接近的环境就是函数的局部环境。 如果初始化变量时没有使用var声明，该变量会自动添加到全局环境。如下所示123456function add(num1,num2)&#123; var sum=num1+num2; return sum;&#125;console.log(add(1,2));//3console.log(sum);//由于sum不是有效的变量，由此会导致错误 如果省略var声明，执行add()之后，sum也将可以访问，如下所示123456function add(num1,num2)&#123; sum=num1+num2; return sum;&#125;console.log(add(1,2));//3console.log(sum);//3 通常在编写JavaScript代码中，我们建议在初始化变量前一定要声明，否则可能会导致意外 查询标识符当在某个环境中为了读取或写入而引入一个标示符时，必须通过搜索来确定此标识符实际代表什么。搜索过程从作用域链的前端开始，向上逐级查询。 下面这个例子，可以展现查询标识符的过程:1234567var color="blue";function getColor()&#123; var color='red'; return color;&#125;console.log(getColor());//redconsole.log(color);//blue 很明显从中可以看出访问局部变量要比访问全局变量快]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[JS中基本类型和引用类型]]></title>
       <url>%2F2016%2F11%2F16%2F1611161%2F</url>
       <content type="text"><![CDATA[基本类型值指的是简单的数据段 引用类型值指那些可能由多个值的构成的对象。 动态属性基本类型我们不能给基本类型的值添加属性。123var person;person.name="Jack";logconsole.log(person.name);//undefined 引用类型可以添加、改变、删除引用类型的属性。123var person=new object();person.name="Jack";console.log(person.name); //Jack 复制变量值基本类型复制基本类型的值时，会在变量对象上创建一个新的值，然后把该值复制到为新变量分配的位置上。123var num1=5;var num2=num1;console.log(num2);//5 引用类型复制引用类型的值时与基本类型一样，不同的是复制的新值实际上是一个指针，而这个指针指向存储在堆中的对象。 如下面例子所示连个变量其实将引用同一个对象：1234var obj1=new Object();var obj2=obj1;obj2.name="Jack";console.log(obj1.name);//Jack 传递参数基本类型在传递基本类型时，传递的值会被赋值给一个局部变量。12345var person=new Object();function setName(obj)&#123; obj.name="Jack";&#125;console.log(person.name);//Jack 引用类型如下所示，变量被传递到setName()之后就被复制给了obj，在函数内部obj和person引用的是同一个对象，即是说这个变量是按值传递的，obj也会按引用来访问同一对象。12345var person=new Object();function setName(obj)&#123; obj.name="Jack";&#125;console.log(person.name);//Jack 由下面的例子我们可以看到，如果person是按引用传递的，那么输出的应该是’Greg’。这说明即是在函数内部修改了参数的值，但原始的引用任然未变。实际上在函数内部重写obj时，这个变量引用的就是一个局部对象了。1234567var person=new Object();function setName(obj)&#123; obj.name="Jack"; obj=new Object(); obj.name="Greg";&#125;console.log(person.name);//Jack]]></content>
     </entry>
