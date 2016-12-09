@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[利用github创建静态项目展示页]]></title>
+      <url>%2F2016%2F12%2F09%2Fgithub-pages%2F</url>
+      <content type="text"><![CDATA[最近在做期末一个小作业，6个前端展示页，于是就想到了放到github上为了更方便的访问于是就有了这篇文章。 准备工作 注册github账号 创建一个公有项目 下载安装git 至此准备工作做好，这些都是基本的步奏，由于本篇文章重点不在此，所以就不再赘述。如果想学习git的使用，推荐廖雪峰的github教程廖雪峰的官方网站; 初始化项目在本地新建project项目文件夹，并初始化：123mkdir project &amp;&amp; projectcd projectgit init 关联刚才创建的远程仓库。注意这里要换成你自己远程库地址1git remote add origin git@github.com:insertsweat/project.git 创建gh-pages分支，并推送项目写好你的项目之后将新建一个文件夹用于存放你的展示页，并push12mkdir view &amp;&amp; viewpush subtree push --prefix=view origin gh-pages 其中view就是你展示的文件夹 然后打开访问地址就是1https://insertsweat.github.io/project //github用户名.github.io/项目名 如果有问题欢迎指正。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[JavaScript模块化编程]]></title>
       <url>%2F2016%2F12%2F03%2Fjs-module%2F</url>
       <content type="text"><![CDATA[立即执行函数写发不暴露私有变量12345678910111213141516var module1=(function()&#123; var _count=0; var m1=function()&#123; //todo &#125; var m2=function()&#123; //todo &#125; return &#123; m1:m2, m2:m2 &#125;&#125;)(); 放大模式继承另一个模块123456var module1=(function(mod)&#123; mod.m3=function()&#123; //..todo &#125; return mod;&#125;)(module1) 为module1模块增加了一个新方法m3()，再放回新的module1模块 宽放大模式在浏览器环境中，模块的各个部分通常都是从网上获取的，有时无法知道哪个部分会先加载。如果采用上一节的写法，第一个执行的部分有可能加载一个不存在空对象，这时就要采用”宽放大模式”。12345var module1=(function(mod)&#123; //..todo return mod;&#125;)(window.module1||&#123;&#125;); 输入全局变量独立性是模块的重要特点，模块内部最好不与程序的其他部分直接交互。为了在模块内部调用全局变量，必须显式地将其他变量输入模块。123var module1=(function($,yui)&#123; //..todo&#125;)(jQuery,YAHOO);]]></content>

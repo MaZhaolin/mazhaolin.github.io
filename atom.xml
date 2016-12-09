@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.cquccc.top/"/>
-  <updated>2016-12-03T06:48:13.000Z</updated>
-  <id>http://blog.cquccc.top/</id>
+  <link href="https://insertsweat.github.io/"/>
+  <updated>2016-12-09T14:06:49.000Z</updated>
+  <id>https://insertsweat.github.io/</id>
   
   <author>
     <name>Mr.Lin</name>
@@ -16,9 +16,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>利用github创建静态项目展示页</title>
+    <link href="https://insertsweat.github.io/2016/12/09/github-pages/"/>
+    <id>https://insertsweat.github.io/2016/12/09/github-pages/</id>
+    <published>2016-12-09T13:39:18.000Z</published>
+    <updated>2016-12-09T14:06:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在做期末一个小作业，6个前端展示页，于是就想到了放到github上<br>为了更方便的访问于是就有了这篇文章。</p>
+<hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册github账号</li>
+<li>创建一个公有项目</li>
+<li>下载安装git</li>
+</ol>
+<p>至此准备工作做好，这些都是基本的步奏，由于本篇文章重点不在此，所以就不再赘述。<br>如果想学习<code>git</code>的使用，推荐廖雪峰的github教程<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官方网站</a>;<br><a id="more"></a></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>在本地新建<code>project</code>项目文件夹，并初始化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir project &amp;&amp; project</div><div class="line">cd project</div><div class="line">git init</div></pre></td></tr></table></figure></p>
+<p>关联刚才创建的远程仓库。注意这里要换成你自己远程库地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:insertsweat/project.git</div></pre></td></tr></table></figure></p>
+<h2 id="创建gh-pages分支，并推送项目"><a href="#创建gh-pages分支，并推送项目" class="headerlink" title="创建gh-pages分支，并推送项目"></a>创建<code>gh-pages</code>分支，并推送项目</h2><p>写好你的项目之后将新建一个文件夹用于存放你的展示页，并push<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir view &amp;&amp; view</div><div class="line">push subtree push --prefix=view origin gh-pages</div></pre></td></tr></table></figure></p>
+<p>其中<code>view</code>就是你展示的文件夹</p>
+<p>然后打开访问地址就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://insertsweat.github.io/project //github用户名.github.io/项目名</div></pre></td></tr></table></figure></p>
+<hr>
+<p>如果有问题欢迎指正。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在做期末一个小作业，6个前端展示页，于是就想到了放到github上&lt;br&gt;为了更方便的访问于是就有了这篇文章。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;注册github账号&lt;/li&gt;
+&lt;li&gt;创建一个公有项目&lt;/li&gt;
+&lt;li&gt;下载安装git&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;至此准备工作做好，这些都是基本的步奏，由于本篇文章重点不在此，所以就不再赘述。&lt;br&gt;如果想学习&lt;code&gt;git&lt;/code&gt;的使用，推荐廖雪峰的github教程&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&quot;&gt;廖雪峰的官方网站&lt;/a&gt;;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="GitHub" scheme="https://insertsweat.github.io/tags/GitHub/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript模块化编程</title>
-    <link href="http://blog.cquccc.top/2016/12/03/js-module/"/>
-    <id>http://blog.cquccc.top/2016/12/03/js-module/</id>
+    <link href="https://insertsweat.github.io/2016/12/03/js-module/"/>
+    <id>https://insertsweat.github.io/2016/12/03/js-module/</id>
     <published>2016-12-03T06:37:39.000Z</published>
     <updated>2016-12-03T06:48:13.000Z</updated>
     
@@ -36,17 +78,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>JS创建对象的几种方法</title>
-    <link href="http://blog.cquccc.top/2016/11/22/js-create-object/"/>
-    <id>http://blog.cquccc.top/2016/11/22/js-create-object/</id>
+    <link href="https://insertsweat.github.io/2016/11/22/js-create-object/"/>
+    <id>https://insertsweat.github.io/2016/11/22/js-create-object/</id>
     <published>2016-11-22T07:00:39.000Z</published>
     <updated>2016-11-22T14:08:27.000Z</updated>
     
@@ -86,17 +128,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>JS对象访问器属性</title>
-    <link href="http://blog.cquccc.top/2016/11/22/js-ObjectdefineProperty/"/>
-    <id>http://blog.cquccc.top/2016/11/22/js-ObjectdefineProperty/</id>
+    <link href="https://insertsweat.github.io/2016/11/22/js-ObjectdefineProperty/"/>
+    <id>https://insertsweat.github.io/2016/11/22/js-ObjectdefineProperty/</id>
     <published>2016-11-22T05:25:39.000Z</published>
     <updated>2016-11-22T06:15:00.000Z</updated>
     
@@ -113,17 +155,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>JS的Function类型</title>
-    <link href="http://blog.cquccc.top/2016/11/21/js-create-function/"/>
-    <id>http://blog.cquccc.top/2016/11/21/js-create-function/</id>
+    <link href="https://insertsweat.github.io/2016/11/21/js-create-function/"/>
+    <id>https://insertsweat.github.io/2016/11/21/js-create-function/</id>
     <published>2016-11-21T13:37:39.000Z</published>
     <updated>2016-11-22T06:14:59.000Z</updated>
     
@@ -165,17 +207,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>JS中没有块级作用域</title>
-    <link href="http://blog.cquccc.top/2016/11/17/js-kuaijizuoyongyu/"/>
-    <id>http://blog.cquccc.top/2016/11/17/js-kuaijizuoyongyu/</id>
+    <link href="https://insertsweat.github.io/2016/11/17/js-kuaijizuoyongyu/"/>
+    <id>https://insertsweat.github.io/2016/11/17/js-kuaijizuoyongyu/</id>
     <published>2016-11-17T13:04:57.000Z</published>
     <updated>2016-11-22T06:15:10.000Z</updated>
     
@@ -199,17 +241,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>JS中基本类型和引用类型</title>
-    <link href="http://blog.cquccc.top/2016/11/16/1611161/"/>
-    <id>http://blog.cquccc.top/2016/11/16/1611161/</id>
+    <link href="https://insertsweat.github.io/2016/11/16/1611161/"/>
+    <id>https://insertsweat.github.io/2016/11/16/1611161/</id>
     <published>2016-11-16T14:04:57.000Z</published>
     <updated>2016-11-22T06:18:11.000Z</updated>
     
@@ -237,17 +279,17 @@
     
     </summary>
     
-      <category term="学习笔记" scheme="http://blog.cquccc.top/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="学习笔记" scheme="https://insertsweat.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javascript" scheme="http://blog.cquccc.top/tags/javascript/"/>
+      <category term="javascript" scheme="https://insertsweat.github.io/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>误删mysql数据之后 ，恢复数据的的方法</title>
-    <link href="http://blog.cquccc.top/2016/11/13/recoverMysqlData/"/>
-    <id>http://blog.cquccc.top/2016/11/13/recoverMysqlData/</id>
+    <link href="https://insertsweat.github.io/2016/11/13/recoverMysqlData/"/>
+    <id>https://insertsweat.github.io/2016/11/13/recoverMysqlData/</id>
     <published>2016-11-13T14:44:02.000Z</published>
     <updated>2016-11-16T14:08:37.000Z</updated>
     
@@ -268,17 +310,17 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://blog.cquccc.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://insertsweat.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Mysql" scheme="http://blog.cquccc.top/tags/Mysql/"/>
+      <category term="Mysql" scheme="https://insertsweat.github.io/tags/Mysql/"/>
     
   </entry>
   
   <entry>
     <title>thinkPHP整合微信公众号支付</title>
-    <link href="http://blog.cquccc.top/2016/11/13/thinkphpWeixinPay/"/>
-    <id>http://blog.cquccc.top/2016/11/13/thinkphpWeixinPay/</id>
+    <link href="https://insertsweat.github.io/2016/11/13/thinkphpWeixinPay/"/>
+    <id>https://insertsweat.github.io/2016/11/13/thinkphpWeixinPay/</id>
     <published>2016-11-13T14:42:19.000Z</published>
     <updated>2016-11-16T14:08:09.000Z</updated>
     
@@ -304,17 +346,17 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.cquccc.top/categories/PHP/"/>
+      <category term="PHP" scheme="https://insertsweat.github.io/categories/PHP/"/>
     
     
-      <category term="thinkPHP" scheme="http://blog.cquccc.top/tags/thinkPHP/"/>
+      <category term="thinkPHP" scheme="https://insertsweat.github.io/tags/thinkPHP/"/>
     
   </entry>
   
   <entry>
     <title>设置Apache，实现一个空间多个域名</title>
-    <link href="http://blog.cquccc.top/2016/11/13/setApacheConfig/"/>
-    <id>http://blog.cquccc.top/2016/11/13/setApacheConfig/</id>
+    <link href="https://insertsweat.github.io/2016/11/13/setApacheConfig/"/>
+    <id>https://insertsweat.github.io/2016/11/13/setApacheConfig/</id>
     <published>2016-11-13T14:27:27.000Z</published>
     <updated>2016-11-16T14:08:34.000Z</updated>
     
@@ -339,17 +381,17 @@
     
     </summary>
     
-      <category term="Apache" scheme="http://blog.cquccc.top/categories/Apache/"/>
+      <category term="Apache" scheme="https://insertsweat.github.io/categories/Apache/"/>
     
     
-      <category term="Apache" scheme="http://blog.cquccc.top/tags/Apache/"/>
+      <category term="Apache" scheme="https://insertsweat.github.io/tags/Apache/"/>
     
   </entry>
   
   <entry>
     <title>生活</title>
-    <link href="http://blog.cquccc.top/2016/11/13/%E7%94%9F%E6%B4%BB/"/>
-    <id>http://blog.cquccc.top/2016/11/13/生活/</id>
+    <link href="https://insertsweat.github.io/2016/11/13/%E7%94%9F%E6%B4%BB/"/>
+    <id>https://insertsweat.github.io/2016/11/13/生活/</id>
     <published>2016-11-13T13:07:07.000Z</published>
     <updated>2016-11-22T06:15:16.000Z</updated>
     
@@ -365,7 +407,7 @@
     
     </summary>
     
-      <category term="生活" scheme="http://blog.cquccc.top/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="生活" scheme="https://insertsweat.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
   </entry>
